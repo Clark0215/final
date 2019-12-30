@@ -1,0 +1,64 @@
+
+.navicon{display:none}
+.nav,.nav *{-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box}
+.nav{
+	font-family:微軟正黑體,arial,sans-serif;
+	font-size:1.5em;
+	font-weight:300;
+	position:fixed;
+	top:60px;
+	right:0;
+	list-style:none;
+	padding:0;
+	z-index:20;
+	opacity:.5;
+	background:red;
+		animation:TestMove3 3s infinite alternate; /*IE*/
+		-moz-animation:TestMove3 3s infinite alternate; /*FireFox*/
+		-webkit-animation:TestMove3 3s infinite alternate; /*Chrome, Safari*/
+	}
+	@keyframes TestMove3{
+	  from  {background-color: orange;}
+	  to  {background-color: yellow;}
+	  to  {background-color:greenyellow;}
+	}
+	@-moz-keyframes TestMove3{    
+	  from  {background-color: orange;}
+	  to  {background-color: yellow;}
+	  to  {background-color:greenyellow;}
+	}
+	@-webkit-keyframes TestMove3{
+	  from  {background-color: orange;}
+	  to  {background-color: yellow;}
+	  to  {background-color:greenyellow;}
+	}
+.nav ul{list-style:none;
+	padding:0;
+	margin:0}
+.nav li{border-top:1px solid rgba(0,0,0,0.5);
+	color:#fff;
+	height:60px;
+	padding:9px 5px 8px 17px;
+	position:relative;
+	width:50px}
+.nav li:first-child{border-top:none}
+.nav a{color:#d0d1d2}
+.nav li:hover a{color:black;}
+
+.no-rgba .nav{background:#000}
+.nav:hover{opacity:1;
+	}
+.nav:hover li{width:255px}
+.nav-title{left:50px;
+	font-family:微軟正黑體,arial,sans-serif;
+	font-size:1em;
+	line-height:1.2;
+	float:right;
+	width:200px;
+	/*padding-top:.5em;*/
+	position:absolute;
+	}
+.section a{text-decoration: none;}
+.nav-title:hover{background-color: plum;}

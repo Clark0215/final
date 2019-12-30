@@ -1,0 +1,169 @@
+/* reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: lightblue;
+  background-repeat:no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 20px;
+  
+}
+
+
+/* other */
+.info {
+  margin: 20px 0;
+  text-align: center;
+}
+#start {
+			  font-weight:bold;
+			  width: 100%;
+			  padding: 50px 0;
+			  text-align: center;
+			  margin-top: 20px;
+			}
+#game {		
+				width:100%;
+			}
+#game a{		
+				float:left;
+				position: relative;
+				margin-top: 50px;
+				margin-left:50px;
+				font-size:48px;
+				color:white;
+			}
+#end{
+				font-weight:bold;
+				margin:0px auto;
+				margin-top: 100px;
+				font-size:36px;
+				float:center;
+				width: 70%;
+				text-align: center;
+				color:red;
+				background-color: white;
+			}
+	
+#k{	width:95%;
+	 position: absolute;
+    bottom:0;
+	
+}
+#k div{
+	width:25%;
+	 position: relative;
+	float:left;
+	
+	
+}
+
+
+
+/* block-$ */
+.block-effect {
+  font-size: calc(8px + 6vw);
+}
+
+.block-reveal {
+  --t: calc(var(--td) + var(--d));
+
+  color: transparent;
+  padding: 4px;
+
+  position: relative;
+  overflow: hidden;
+
+  -webkit-animation: revealBlock 0s var(--t) forwards;
+
+          animation: revealBlock 0s var(--t) forwards;
+}
+
+.block-reveal::after {
+  content: '';
+
+  width: 0%;
+  height: 100%;
+  padding-bottom: 4px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: var(--bc);
+  -webkit-animation: revealingIn var(--td) var(--d) forwards, revealingOut var(--td) var(--t) forwards;
+          animation: revealingIn var(--td) var(--d) forwards, revealingOut var(--td) var(--t) forwards;
+}
+
+
+/* animations */
+@-webkit-keyframes revealBlock {
+  100% {
+    color: #0f0f0f;
+  }
+}
+@keyframes revealBlock {
+  100% {
+    color: #0f0f0f;
+  }
+}
+
+@-webkit-keyframes revealingIn {
+
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes revealingIn {
+
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@-webkit-keyframes revealingOut {
+
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+
+}
+
+@keyframes revealingOut {
+
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+
+}

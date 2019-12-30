@@ -1,0 +1,28 @@
+
+			
+			#start {
+			  font-weight:bold;
+			  width: 100%;
+			  padding: 50px 0;
+			  text-align: center;
+			  margin-top: 20px;
+			}
+			#game a{
+				position: absolute;
+				top:50px;
+				left: 50px;
+				font-size:48px;
+				color:white;
+			}
+			#end{
+				font-weight:bold;
+				margin:0px auto;
+				margin-top: 100px;
+				font-size:36px;
+				float:center;
+				width: 70%;
+				text-align: center;
+				color:red;
+				background-color: white;
+			}
+    
