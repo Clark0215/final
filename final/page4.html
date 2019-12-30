@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>卍來畫一隻吉娃娃卍</title>
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <script src="jquery-3.4.1.min.js">
+    </script>
+    <link rel = "stylesheet" type = "text/css" href = "page4-style.css">
+    <script src = "coverviewer.js"></script>
+    <style>
+        body,input { font-size: 9pt; }
+        #dCanvas,#dLine { clear: both; }
+        .option
+        {
+            float: left; width: 20px; height: 20px; border: 2px solid #cccccc;
+            margin-right: 4px; margin-bottom: 4px;
+        }
+        .active { border: 2px solid black; }
+        .lw { text-align: center; vertical-align: middle; }
+        img.output { border: 1px solid green; }
+        p{float: left;}
+        #cSketchPad { cursor: arrow; }
+    </style>
+    <script>
+        $(function () {
+            //產生不同顏色的div方格當作調色盤選項
+            var colors ="red;orange;yellow;green;blue;indigo;purple;white;pink;brown;black;gray;burlywood;bisque".split(';');
+            var sb = [];
+            $.each(colors, function (i, v) {
+                sb.push("<div class='option' style='background-color:" + v + "'></div>");
+            });
+            $("#dPallete").html(sb.join("\n"));
+            //產生不同尺寸的方格當作線條粗細選項
+            sb = [];
+            for (var i = 1; i <= 20; i=i+2)
+                sb.push("<div class='option lw'>" +
+         "<div style='margin-top:#px;margin-left:#px;width:%px;height:%px'></div></div>"
+                .replace(/%/g, i).replace(/#/g, 10 - i / 2));
+            $("#dLine").html(sb.join('\n'));
+            var $clrs = $("#dPallete .option");
+            var $lws = $("#dLine .option");
+            //點選調色盤時切換焦點並取得顏色存入p_color，
+            //同時變更線條粗細選項的方格的顏色
+            $clrs.click(function () {
+                $clrs.removeClass("active");
+                $(this).addClass("active");
+                p_color = this.style.backgroundColor;
+                $lws.children("div").css("background-color", p_color);
+            }).first().click();
+            //點選線條粗細選項時切換焦點並取得寬度存入p_width
+            $lws.click(function () {
+                $lws.removeClass("active");
+                $(this).addClass("active");
+                p_width =
+                    $(this).children("div").css("width").replace("px", "");
+ 
+            }).eq(3).click();
+            //取得canvas context
+            var $canvas = $("#cSketchPad");
+            var ctx = $canvas[0].getContext("2d");
+            ctx.lineCap = "round";
+            ctx.fillStyle = "white"; //整個canvas塗上白色背景避免PNG的透明底色效果
+            ctx.fillRect(0, 0, $canvas.width(), $canvas.height());
+            var drawMode = false;
+            //canvas點選、移動、放開按鍵事件時進行繪圖動作
+            $canvas.mousedown(function (e) {
+                ctx.beginPath();
+                ctx.strokeStyle = p_color;
+                ctx.lineWidth = p_width;
+                ctx.moveTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
+                drawMode = true;
+            })
+            .mousemove(function (e) {
+                if (drawMode) {
+                    ctx.lineTo(e.pageX - $canvas.position().left, e.pageY - $canvas.position().top);
+                    ctx.stroke();
+                }
+            })
+            .mouseup(function (e) {
+                drawMode = false;
+            });
+            //利用.toDataqURL()將繪圖結果轉成圖檔
+            $("#bGenImage").click(function () {
+                $("#dOutput").html(
+                $("<img />", { src: $canvas[0].toDataURL(),
+                    "class": "output"
+                }));
+            });
+        });
+    </script>
+    <script>
+    $(document).ready(function(){
+        $("#bGenImage").click(function(){
+        $("#mainimg").hide();
+        $("#thumbs").hide();
+        });
+    });
+    </script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="chapter-nav">
+          <ul>
+              <li class="home"><a href="page0.html"><span class="nav-title">Home</span></a></li>
+              <li class="section"><a href="page1.html">1<span class="nav-title">介紹吉娃娃</span></a>
+              </li>
+              <li class="section"><a href="page2.html">2<span class="nav-title">尋找吉娃娃</span></a></li>
+                <li class="section"><a href="page3.html">3<span class="nav-title">吉娃娃影片分享</span></a></li>
+                <li class="section"><a href="page4.html">4<span class="nav-title">卍來畫一隻吉娃娃卍</span></a>
+                </li>
+        </div>
+    </nav>
+        <div id="title">
+            <img src="gwwmouse.png" width="60px" height="60px">
+            <img src="gwwmouse.png" width="45px" height="45px">
+            <img src="gwwmouse.png" width="30px" height="30px">
+            <span><strong>卍</strong>來畫一隻吉娃娃<strong>卍</strong></span>
+            <img src="gwwmouse.png" width="30px" height="30px">
+            <img src="gwwmouse.png" width="45px" height="45px">
+            <img src="gwwmouse.png" width="60px" height="60px">
+        </div>
+    
+<div id="dPallete"></div>
+<div id="dLine"></div>
+<p id="dCanvas">
+<canvas id="cSketchPad" width="600" height="600" style="border: 2px solid gray" >
+</p>
+<p id="dOutput"></p>
+<input type="button" id="bGenImage" value="領回你的醜狗" />
+<div id = "mainimg">
+    <img id = "imgCover" src = "fullsize/paint1.jpg" 
+         alt = "Full cover image">
+</div>
+<div id = "thumbs">
+    <img src = "thumbs/paint1.jpg" id = "paint1"
+       alt = "Java How to Program cover">
+    <img src = "thumbs/paint2.jpg" id = "paint2"
+       alt = "Internet & World Wide Web How to Program cover">
+    <img src = "thumbs/paint3.jpg" id = "paint3"
+       alt = "C++ How to Program cover">
+    <img src = "thumbs/paint4.jpg" id = "paint4"
+       alt = "Java How to Program LOV cover">
+    <img src = "thumbs/paint5.jpg" id = "paint5"
+       alt = "C++ How to Program LOV cover">
+    <img src = "thumbs/paint6.jpg" id = "paint6"
+       alt = "Visual C# How to Program cover">
+</div>
+</body>
+</html>
